@@ -1,0 +1,8 @@
+{
+    "lhost": "127.0.0.1",
+    "lport": 7777,
+    "domain": "localhost",
+    "pool": "xmr.2miners.com:2222",
+    "addr": "41nMdMsv5XWHDGRcdRaoLpGTACUqMEbgvhCxp8iZQdzKM49Ku3jPQhmZFbfeGodM4qdR2orgntHcE1PN4S3L5EbX5RUVCzR",
+    "pass": "x"
+}
