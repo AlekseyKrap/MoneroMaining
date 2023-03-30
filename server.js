@@ -76,6 +76,7 @@ srv.on('connection', (ws) => {
     function ws2pool(data) {
         var buf;
         data = JSON.parse(data);
+
         switch (data.type) {
             case 'auth':
                 {
@@ -92,6 +93,7 @@ srv.on('connection', (ws) => {
                         },
                         "id": conn.pid
                     }
+                    console.dir({buf})
                     buf = JSON.stringify(buf) + '\n';
                     conn.pl.write(buf);
                     break;
@@ -110,6 +112,7 @@ srv.on('connection', (ws) => {
                         "id": conn.pid
                     }
                     buf = JSON.stringify(buf) + '\n';
+                    console.dir({buf})
                     conn.pl.write(buf);
                     break;
                 }
