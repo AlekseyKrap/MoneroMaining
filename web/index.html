@@ -7,8 +7,41 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CryptoNoter - Javascript Browser XMR Mining Script</title>
     <style>
-        th {
-            width: 180px;
+        :root {
+            --error: #F15744;
+        }
+        * {
+            box-sizing: border-box;
+            letter-spacing: .02rem;
+            font-family: TT Norms Pro;
+            font-size: 14px;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .error_area[data-v-2341bf32] {
+            background-color: #f4edf1;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 16px;
+            color: var(--error);
+            font-weight: 700;
+            margin: 0px;
+            gap: 10px;
+        }
+        button[data-v-2341bf32] {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            height: 32px;
+            width: 32px;
+            border-radius: 8px;
         }
     </style>
     <script src="/processor.js"></script>
@@ -21,51 +54,33 @@
         miner.start();
 
         // Listen on events
-
         miner.on('error', function (...data) {
-            console.log('error',data)
+            console.log('error', data)
         })
 
         miner.on('changeData', function (data) {
-            document.getElementById("TotalHashes").innerHTML = data.totalHashes;
-            document.getElementById("VerifiedShares").innerHTML =  data.sharesVerfied;
-            document.getElementById("FoundShares").innerHTML = data.sharesFound;
-            document.getElementById("Hashes").innerHTML = data.hashRate;
+            parent.postMessage({event:'changeData',data},"*")
         })
     </script>
 </head>
 
 <body>
-<table width='930' cellpadding= '5' cellspacing='0'style='margin:0px;font-size:14px;' />
-<tr>
-    <td width='150' align='left' valign='top' style='border-bottom: 1px solid #d6d5d5;'>
-        <b>Hash Rate / Sec</b>
-    </td>
-    <td width='195' align='left' valign='top' style='border-bottom: 1px solid #d6d5d5;'>
-        <b>Total Hashes</b>
-    </td>
-    <td width='195' align='left' valign='top' style='border-bottom: 1px solid #d6d5d5;'>
-        <b>Shares Found</b>
-    </td>
-    <td width='195' align='left' valign='top' style='border-bottom: 1px solid #d6d5d5;'>
-        <b>Shares Verfied</b>
-    </td>
-</tr>
-<tr>
-    <td width='150' align='left' valign='top' style='border-bottom: 1px solid #d6d5d5;'>
-        <div id="Hashes">0</div>
-    </td>
-    <td width='195' align='left' valign='top' style='border-bottom: 1px solid #d6d5d5;'>
-        <div id="TotalHashes">0</div>
-    </td>
-    <td width='195' align='left' valign='top' style='border-bottom: 1px solid #d6d5d5;'>
-        <div id="FoundShares">0</div>
-    </td>
-    <td width='195' align='left' valign='top' style='border-bottom: 1px solid #d6d5d5;'>
-        <div id="VerifiedShares">0</div>
-    </td>
-</tr>
-</table>
+
+<div data-v-2341bf32="" class="error_area">
+    <svg data-v-f7316193="" data-v-2341bf32="" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+         class="icon" width="32" height="32">
+        <rect width="32" height="32" rx="11" fill="#F15744"></rect>
+        <path d="M14.758 9.063v9.334h2.667V9.063h-2.667Zm0 10.667v2.667h2.667V19.73h-2.667Z" fill="#fff"></path>
+    </svg>
+    Don't close the page, to continue mining
+<!--    <button data-v-2341bf32="" type="button">-->
+<!--        <svg data-v-f7316193="" data-v-2341bf32="" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"-->
+<!--             class="icon" width="20" height="20">-->
+<!--            <path d="m12.667 4.273-.94-.94L8 7.06 4.274 3.333l-.94.94L7.06 8l-3.726 3.727.94.94L8 8.94l3.727 3.727.94-.94L8.94 8l3.727-3.727Z"-->
+<!--                  fill="#F15744"></path>-->
+<!--        </svg>-->
+<!--    </button>-->
+</div>
 </body>
 </html>
 
