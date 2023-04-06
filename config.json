@@ -1,5 +1,5 @@
 {
-    "lhost": "127.0.0.1",
+    "lhost": "192.168.13.155",
     "lport": 7777,
     "domain": "m.prominer.online",
     "pool": "pool.hashvault.pro:80",
