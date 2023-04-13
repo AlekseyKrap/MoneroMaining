@@ -53,11 +53,15 @@
         });
         miner.start();
 
+
+
         // Listen on events
         miner.on('error', function (...data) {
             console.log('error', data)
         })
-
+        // var unsubscribe = miner.on('changeData', function (data) {
+        //     console.table(data)
+        // });
         miner.on('changeData', function (data) {
             parent.postMessage({event:'changeData',data},"*")
         })

